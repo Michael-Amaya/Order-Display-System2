@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Layout for ORDER Order Display System</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		
+	</head>
+	<body> 
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		-->
+		<div class="row">
+			<div id="orders" class="col-sm-8" style="background-color:azure;font-size: 30px;font-family: Tahoma; font-weight:bold;height: 90vh;overflow-y:auto;">
+				<span id = "orderTxt"></span>
+			</div>
+			<div class="col-sm-4" style="background-color: black;color: white;font-size: 18px;font-family: Arial;">
+				 <img class="img-fluid" src="https://cdn.stocksnap.io/img-thumbs/960w/M9SLUDGRNT.jpg" /> 
+				 <p>Try our new crap</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12" style="background-color: black;color: white;font-size: 22px;font-family: Arial; font-weight: bold;height:10vh;">
+				<p>Subtotal: 0.00&emsp;&emsp;&emsp;Tax:0.00&emsp;&emsp;&emsp;Discount: 0.00&emsp;&emsp;&emsp;Total: 0.00</p>
+			</div>
+		</div>
+	</body>
+	
+	<script>
+		function updateScroll(){
+			var element = document.getElementById("orders");
+			element.scrollTop = element.scrollHeight;
+			//document.getElementById('orderTxt').innerHTML='WOW';
+		}
+		
+		setInterval(updateScroll,1000);
+	</script>
+</html>
+

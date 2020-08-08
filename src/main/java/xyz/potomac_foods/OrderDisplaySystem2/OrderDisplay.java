@@ -19,12 +19,13 @@ public class OrderDisplay extends Application {
 
     public void start(Stage primaryStage) {
         StackPane mainPane = new StackPane();   // StackPane so the webview takes the whole page
-        WebView mainPage = new WebView();       // What the program will load up
+        WebView mainView = new WebView();       // What the program will load up
 
-        Config config = new Config("config.yml"); // The program config
+        Config config = new Config("config.yml");                       // The program config
+        DisplayController controller = new DisplayController(mainView, config);  // Controller for display
 
         // Add the WebView to the application
-        mainPane.getChildren().add(mainPage);
+        mainPane.getChildren().add(mainView);
 
         Scene root = new Scene(mainPane, 1024, 720);
         primaryStage.setScene(root);
@@ -33,6 +34,7 @@ public class OrderDisplay extends Application {
 
         // Set the program to Full screen
         // primaryStage.setFullScreen(true);
+
 
 
     }
