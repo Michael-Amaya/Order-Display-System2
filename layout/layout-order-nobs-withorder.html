@@ -83,7 +83,14 @@
     <body>
         <div class="main-view">
             <div id="order-main" class="order-main">
-                
+                1&emsp; Whopper CMB SML <p class="price">11.08</p>         <br />
+                <span class="condiments">
+                &emsp;&emsp; - NO PICKLE         <br />
+                &emsp;&emsp; - NO BACON          <br />
+                &emsp;&emsp; - ADD Lg. Am.Chs    <br />
+                </span>
+                1&emsp; Small Fries           <br />
+                1&emsp; Small Coke            <br />
             </div>
             <div class="order-side">
                 <img id="side-image" src="images/corner.png" />
@@ -103,27 +110,27 @@
             const orderTax = document.getElementById('tax');
             const orderTotal = document.getElementById('total');
 
-            const setOrder = order => {
+            const updateOrder = order => {
                 orderMain.innerHTML = order;
             }
 
-            const setSideImage = image => {
+            const updateSideImage = image => {
                 orderSideImage.src = image;
             }
 
-            const setDescription = description => {
+            const updateDescription = description => {
                 orderDescription.innerHTML = description;
             }
 
-            const setSubTotal = subTotal => {
+            const updateSubtotal = subTotal => {
                 orderSubTotal.innerHTML = subTotal;
             }
 
-            const setTax = tax => {
+            const updateTax = tax => {
                 orderTax.innerHTML = tax;
             }
 
-            const setTotal = total => {
+            const updateTotal = total => {
                 orderTotal.innerHTML = total;
             }
 
@@ -131,8 +138,10 @@
                 orderMain.scrollTop = orderMain.scrollHeight;
             }
 
-            setInterval(updateScroll,100);
-            alert("command:ready");
+            updateSideImage('images/pic3.png');
+
+            setInterval(updateScroll,1000);
+            // alert("command:ready");
         </script>
     </body>
 </html>

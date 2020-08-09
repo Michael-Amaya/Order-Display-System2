@@ -4,6 +4,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Layout for TOTAL Order Display System 2, by Michael Amaya</title>
+        <meta name="version" content="2.0">
+        <meta name="author" content="Michael Amaya">
     </head>
     <style>
         * { margin: 0; padding: 0; }
@@ -60,7 +62,7 @@
             <table class="center">
                 <tr>
                     <td class="column-left">Subtotal:</td>
-                    <td id="subtotal" class="column-right">$5.00</td>
+                    <td id="subtotal" class="column-right">$0.00</td>
                 </tr>
                 <tr>
                     <td class="column-left">Tax:</td>
@@ -68,7 +70,7 @@
                 </tr>
                 <tr>
                     <td class="column-left">Total:</td>
-                    <td id="total" class="column-right">$5.00</td>
+                    <td id="total" class="column-right">$0.00</td>
                 </tr>
             </table>
         </div>
@@ -89,7 +91,7 @@
                 orderTotal.innerHTML = total;
             }
 
-            setTotal('$17.00')
+            alert("command:ready");
         </script>
     </body>
 </html>
