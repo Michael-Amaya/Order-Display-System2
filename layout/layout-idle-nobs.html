@@ -4,6 +4,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Layout for IDLE Order Display System 2, by Michael Amaya</title>
+        <meta name="version" content="2.0">
+        <meta name="author" content="Michael Amaya">
     </head>
     <style>
         * { margin: 0; padding: 0; }
@@ -33,7 +35,9 @@
             }
 
             const setSlideTime = time => {
-                slideTime = time * 1000;
+                clearInterval(refreshIntervalID);
+                slideTime = parseInt(time, 10) * 1000;
+                refreshIntervalID = setInterval(slideShow, slideTime);
             }
 
             const slideShow = () => {
@@ -45,7 +49,10 @@
                 }
             }
 
-            setInterval(slideShow, slideTime);
+            let refreshIntervalID = setInterval(slideShow, slideTime);
+            alert("command:ready");
+
+            
         </script>
     </body>
 </html>
