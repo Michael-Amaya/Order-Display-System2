@@ -6,19 +6,21 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
+import java.net.MalformedURLException;
+
 /** Order Display System shows orders gotten from TCP Connections to a screen
  *  Inherits the Application class from the JavaFX package
  *  in order to open a webview
  *
  * @author  Michael Amaya
  * @version 1.0
- * @since   2020-7-25
+ * @since   2020-08-09
  *
  */
 public class OrderDisplay extends Application {
 
-    public void start(Stage primaryStage) {
-        StackPane mainPane = new StackPane();   // StackPane so the webview takes the whole page
+    public void start(Stage primaryStage) throws MalformedURLException {
+        StackPane mainPane = new StackPane();   // StackPane so the WebView takes the whole page
         WebView mainView = new WebView();       // What the program will load up
 
         Config config = new Config("config.yml");                       // The program config
@@ -33,10 +35,12 @@ public class OrderDisplay extends Application {
         primaryStage.show();
 
         // Set the program to Full screen
-        // primaryStage.setFullScreen(true);
+        primaryStage.setFullScreen(true);
 
-
-
+        TCPServer server = new TCPServer(Integer.parseInt(config.getConfig().getOrDefault("port", 5901).toString()), controller);
+        Thread serverThread = new Thread(server);
+        serverThread.setDaemon(true);
+        serverThread.start();
     }
 
     /** Launches the JavaFX Application */
