@@ -6,20 +6,19 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /** Class that reads the config from the config file to be used
  *  in the rest of the program
  *
  * @author  Michael Amaya
  * @version 1.0
- * @since   2020-07-25
+ * @since   2020-08-09
  *
  */
 public class Config {
     /** The map that will hold the config, will use
-     *  Map<>.getOfDefault(keyToSearch, defaultValue) in order to
+     *  Map<>.getOrDefault(keyToSearch, defaultValue) in order to
      *  see if the config was retrieved correctly.
      *
      */
@@ -33,8 +32,8 @@ public class Config {
      */
     public Config(String fileName) {
         Yaml configYaml = new Yaml();
-        String configPath = System.getProperty("user.dir") + "\\" + fileName;
-        File configFile = new File(configPath);
+        // String configPath = System.getProperty("user.dir") + "\\" + fileName;
+        File configFile = new File(fileName);
 
         try {
             InputStream configInput= new FileInputStream(configFile);
@@ -47,7 +46,7 @@ public class Config {
             */
 
         } catch (FileNotFoundException e) {
-            System.out.println("File not found: " +  System.getProperty("user.dir") + "\\" + fileName);
+            System.out.println("File not found: " + fileName);
         }
     }
 
