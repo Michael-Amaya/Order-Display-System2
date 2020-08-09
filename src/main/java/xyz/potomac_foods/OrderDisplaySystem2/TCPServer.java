@@ -9,7 +9,7 @@ import java.net.Socket;
  *
  * @author  Michael Amaya
  * @version 1.0
- * @since 2020-07-25
+ * @since 2020-08-09
  *
  */
 public class TCPServer implements Runnable{
@@ -77,7 +77,8 @@ public class TCPServer implements Runnable{
                     data.append(msg);
                 }
 
-                this.controller.sendData(data.toString());
+                System.out.println("Sending");
+                this.controller.parseAndSendData(data.toString());
                 data.delete(0, data.length());
             } catch(Exception e) {
                 e.printStackTrace();
