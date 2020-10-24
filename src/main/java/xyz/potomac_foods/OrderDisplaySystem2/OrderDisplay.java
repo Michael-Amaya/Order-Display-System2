@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /** Order Display System shows orders gotten from TCP Connections to a screen
@@ -20,10 +22,10 @@ import java.util.List;
  *
  */
 public class OrderDisplay extends Application {
+	
+	boolean downloadedUpdater = false;
 
     public void start(Stage primaryStage) throws MalformedURLException {
-    	// Routines to do before opening anything
-    	
     	// Get parameters
     	Parameters params = getParameters();
     	List<String> paramList = params.getRaw();
@@ -34,6 +36,13 @@ public class OrderDisplay extends Application {
     	// Updater
     	if (Utilities.hasInternetConnection()) {
     		updateUpdater(downloadUpdater);
+    		try {
+    			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy_HH:mm:ss");
+    		    Date date = new Date(); 
+				Utilities.getHTML("https://potomac-foods.xyz/ods2/log.php?store_num=None" + "&program=OrderDisplaySystem2&log=Updated%20Updater%20Successfully%20On%20" + formatter.format(date) + "!");
+			} catch (IOException e) {
+				// Ignored
+			}
     	} else {
     		System.out.println("No Internet connection! Can't update updater");
     	}
@@ -80,6 +89,7 @@ public class OrderDisplay extends Application {
 			
 			try {
 				downloader.downloadAll();
+				downloadedUpdater = true;
 				System.out.println("Finished updating Updater!");
 			} catch (IOException e) {
 				System.err.println("There was a fatal error downloading the updater.. " + e);
