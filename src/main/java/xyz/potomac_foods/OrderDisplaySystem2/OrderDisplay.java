@@ -10,7 +10,7 @@ import java.net.MalformedURLException;
 
 /** Order Display System shows orders gotten from TCP Connections to a screen
  *  Inherits the Application class from the JavaFX package
- *  in order to open a webview
+ *  in order to open a WebView
  *
  * @author  Michael Amaya
  * @version 1.0
@@ -20,6 +20,9 @@ import java.net.MalformedURLException;
 public class OrderDisplay extends Application {
 
     public void start(Stage primaryStage) throws MalformedURLException {
+    	// Routines to do before opening anything
+    	// TODO Update the updater
+    	
         StackPane mainPane = new StackPane();   // StackPane so the WebView takes the whole page
         WebView mainView = new WebView();       // What the program will load up
 
