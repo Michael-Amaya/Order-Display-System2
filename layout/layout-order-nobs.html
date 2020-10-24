@@ -91,9 +91,9 @@
             </div>
         </div>
         <div class="totals-view">
-            <p class="totals">Subtotal: </p><p id="subtotal" class="subtotal totals">$0.00</p>&emsp;&emsp;&emsp;
-            <p class="totals">Tax: </p><p id="tax" class="tax totals">$0.00</p>&emsp;&emsp;&emsp;
-            <p class="totals">Total: </p><p id="total" class="total totals">$0.00</p>&emsp;&emsp;&emsp;
+            <p id="subtotaltext" class="totals">Subtotal: </p><p id="subtotal" class="subtotal totals">$0.00</p>&emsp;&emsp;&emsp;
+            <p id="taxtext" class="totals">Tax: </p><p id="tax" class="tax totals">$0.00</p>&emsp;&emsp;&emsp;
+            <p id="totaltext" class="totals">Total: </p><p id="total" class="total totals">$0.00</p>&emsp;&emsp;&emsp;
         </div>
         <script language="javascript">
             const orderMain = document.getElementById('order-main');
@@ -102,6 +102,9 @@
             const orderSubTotal = document.getElementById('subtotal');
             const orderTax = document.getElementById('tax');
             const orderTotal = document.getElementById('total');
+            const subTotalText = document.getElementById('subtotaltext');
+            const taxText = document.getElementById('taxtext');
+            const totalText = document.getElementById('totaltext');
 
             const setOrder = order => {
                 orderMain.innerHTML = order;
@@ -129,6 +132,24 @@
 
             const updateScroll = () => {
                 orderMain.scrollTop = orderMain.scrollHeight;
+            }
+            
+            const updateOrderFontSize = size => {
+                orderMain.style.fontSize = size;
+            }
+            
+            const updateTotalsFontSize = size => {
+                orderSubTotal.style.fontSize = size;
+                orderTax.style.fontSize = size;
+                orderTotal.style.fontSize = size;
+            
+                subTotalText.style.fontSize = size;
+                taxText.style.fontSize = size;
+                totalText.style.fontSize = size;
+            }
+            
+            const updateDescriptionFontSize = size => {
+                orderDescription.style.fontSize = size;
             }
 
             setInterval(updateScroll,100);

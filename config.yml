@@ -1,7 +1,6 @@
 port: 5901
 pay-delay: 7
 slideshow-delay: 7
-slideshow-images:
-  - images/pic2.png
-  - images/pic3.png
-corner-image: images/corner.png
+order-main-font-size: 10px
+order-totals-font-size: 10px
+order-description-font-size: 10px

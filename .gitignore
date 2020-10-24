@@ -29,3 +29,6 @@ hs_err_pid*
 target
 *.iml
 *.MF
+/.classpath
+/.project
+/OrderDisplaySystem2.userlibraries

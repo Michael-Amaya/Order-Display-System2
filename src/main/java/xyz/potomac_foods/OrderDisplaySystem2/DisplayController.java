@@ -29,20 +29,17 @@ import java.util.concurrent.TimeUnit;
  *
  */
 public class DisplayController {
-    /** The main Webview of the program */
-    private WebView mainView;
-
     /** The main WebEngine of the program */
     private WebEngine webEngine;
 
     /** The Program's Config */
     private Config config;
 
+    /** The Program's updated config */
+    private Config updateConfig;
+
     /** The program's current screen */
     private String currentScreen;
-
-    /** Check if the page is loaded */
-    private boolean isLoaded = false;
 
     /** The idle screen file name */
     private String idleScreenFileName;
@@ -59,10 +56,10 @@ public class DisplayController {
      * @param mainView  The program's main WebView
      * @param config    The program's config
      */
-    public DisplayController(WebView mainView, Config config) throws MalformedURLException {
-        this.mainView = mainView;
+    public DisplayController(WebView mainView, Config config, Config updateConfig) throws MalformedURLException {
         this.webEngine = mainView.getEngine();
         this.config = config;
+        this.updateConfig = updateConfig;
         this.currentScreen = "NONE";
         this.idleScreenFileName = new File("layout/layout-idle-nobs.html").toURI().toURL().toString();
         this.orderScreenFileName = new File("layout/layout-order-nobs.html").toURI().toURL().toString();
@@ -152,8 +149,9 @@ public class DisplayController {
 
     /** Loads the pictures and slideshow delay from
      *  The config so the slideshow works correctly */
-    private void loadIdleSettings() {
-        for (String picLink : (List<String>) config.getConfig().get("slideshow-images")) {
+    @SuppressWarnings("unchecked")
+	private void loadIdleSettings() {
+        for (String picLink : (List<String>) updateConfig.getConfig().get("slideshow-images")) {
             runScript("addImage('" + picLink + "')");
         }
 
@@ -170,11 +168,20 @@ public class DisplayController {
      * @param total     The order's total
      */
     private void loadOrderSettings(String orderData, String cornerPic, String subTotal, String tax, String total){
+
+        String orderFontSize = config.getConfig().getOrDefault("order-main-font-size", 45).toString();
+        String totalsFontSize =  config.getConfig().getOrDefault("order-totals-font-size", 45).toString();
+        String descriptionFontSize = config.getConfig().getOrDefault("order-description-font-size", 36).toString();
+
         runScript("setOrder('" + orderData + "')");
         runScript("setSideImage('" + cornerPic + "')");
         runScript("setSubTotal('$" + subTotal + "')");
         runScript("setTax('$" + tax + "')");
         runScript("setTotal('$"+ total + "')");
+
+        runScript("updateOrderFontSize('" + orderFontSize + "')");
+        runScript("updateTotalsFontSize('" + totalsFontSize + "')");
+        runScript("updateDescriptionFontSize('" + descriptionFontSize + "')");
     }
 
     /** Loads the totals screen settings, such as the
@@ -259,7 +266,7 @@ public class DisplayController {
      * @param data XML Data that has order information that needs to go on the screen, usually gotten from a TCP Server
      */
     public void parseAndSendData(String data){
-        String cornerPic = config.getConfig().getOrDefault("corner-image", "images/corner.png").toString();
+        String cornerPic = updateConfig.getConfig().getOrDefault("corner-image", "images/corner.png").toString();
 
         Document orderDoc = convertStringToXMLDocument(data);
 
