@@ -6,7 +6,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.List;
 
 /** Order Display System shows orders gotten from TCP Connections to a screen
  *  Inherits the Application class from the JavaFX package
@@ -21,7 +23,23 @@ public class OrderDisplay extends Application {
 
     public void start(Stage primaryStage) throws MalformedURLException {
     	// Routines to do before opening anything
-    	// TODO Update the updater
+    	
+    	// Get parameters
+    	Parameters params = getParameters();
+    	List<String> paramList = params.getRaw();
+    	boolean downloadUpdater = true;
+    	if (paramList.size() != 0)
+    		downloadUpdater = Boolean.parseBoolean(paramList.get(0));
+    	
+    	// Updater
+    	if (Utilities.hasInternetConnection()) {
+    		updateUpdater(downloadUpdater);
+    	} else {
+    		System.out.println("No Internet connection! Can't update updater");
+    	}
+    	
+    	// End Updater
+    	
     	
         StackPane mainPane = new StackPane();   // StackPane so the WebView takes the whole page
         WebView mainView = new WebView();       // What the program will load up
@@ -52,6 +70,25 @@ public class OrderDisplay extends Application {
         serverThread.start();
     }
 
-    /** Launches the JavaFX Application */
+    private void updateUpdater(boolean downloadUpdater) {
+    	// Need to download https://www.potomac-foods.xyz/ods2/downloads/ODSUpdater2.jar
+    	if (downloadUpdater) {
+			System.out.println("Beginning to update Updater....");
+			Downloader downloader = new Downloader("https://www.potomac-foods.xyz/ods2/downloads/");
+			
+			downloader.add("/ODSUpdater2.jar");
+			
+			try {
+				downloader.downloadAll();
+				System.out.println("Finished updating Updater!");
+			} catch (IOException e) {
+				System.err.println("There was a fatal error downloading the updater.. " + e);
+			}
+    	} else {
+    		System.out.println("Chose not to download the updater");
+    	}
+	}
+
+	/** Launches the JavaFX Application */
     public static void main(String[] args) { launch(args); }
 }
