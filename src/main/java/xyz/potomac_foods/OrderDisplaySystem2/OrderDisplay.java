@@ -32,7 +32,8 @@ public class OrderDisplay extends Application {
     	boolean downloadUpdater = true;
     	if (paramList.size() != 0)
     		downloadUpdater = Boolean.parseBoolean(paramList.get(0));
-    	
+
+    	// Test something
     	// Updater
     	if (Utilities.hasInternetConnection()) {
     		updateUpdater(downloadUpdater);
