@@ -1,6 +1,7 @@
 package xyz.potomac_foods.OrderDisplaySystem2;
 
 import javafx.application.Application;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebView;
@@ -59,11 +60,12 @@ public class OrderDisplay extends Application {
         DisplayController controller = new DisplayController(mainView, config, updateConfig);  // Controller for display
 
         // Add the WebView to the application
+		mainView.setCursor(Cursor.NONE);
         mainPane.getChildren().add(mainView);
-
+		mainPane.setCursor(Cursor.NONE);
         Scene root = new Scene(mainPane, 1024, 720);
+        root.setCursor(Cursor.NONE);
         primaryStage.setScene(root);
-
         // Make it so the application is always on the top
         primaryStage.setAlwaysOnTop(true);
 
